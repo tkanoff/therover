@@ -88,6 +88,13 @@ class Rover:
         self.position_y = int(coords.group(2))
         self.position_facing = coords.group(3)
 
+    def represent(self):
+        return "%s %s %s" % (
+            str(self.position_x),
+            str(self.position_y),
+            self.position_facing
+        )
+
     def __repr__(self):
         return '<%s object. Position: %s; Directions: %s>' \
                % (self.__class__.__name__, str(self.position), str(self.directions))
