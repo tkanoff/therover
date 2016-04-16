@@ -20,7 +20,6 @@ directions_position_pattern = re.compile("^[A-Z]+")
 with open(filename) as f:
     for line in f:
         line = line.strip()
-        print line
 
         # Get initial Plateau coordinates
         if not plateau_initial:
@@ -29,7 +28,6 @@ with open(filename) as f:
             except:
                 print('Failed to read Plateau initial coordinates')
 
-        print rovers.keys()
         if rover_index not in rovers.keys():
             rovers[rover_index] = Rover()
 
@@ -38,11 +36,9 @@ with open(filename) as f:
 
         if position:
             rovers[rover_index].set_position(position.group(0))
-            print position.group(0)
 
         if directions:
             rovers[rover_index].set_directions(directions.group(0))
-            print directions.group(0)
 
         if rovers[rover_index].is_ready():
             rover_index += 1
@@ -50,3 +46,12 @@ with open(filename) as f:
 
 print plateau_initial
 print rovers
+
+
+plateau = Plateau(plateau_initial['x'], plateau_initial['y'])
+for r in rovers.values():
+    r.set_plateau(plateau)
+    r.split_coordinates()
+
+
+
