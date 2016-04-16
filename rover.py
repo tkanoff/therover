@@ -66,6 +66,9 @@ class Rover:
             print "Cannot move to the position"
 
     def move(self):
+        # Make the rover move!
+        # It will go command by command towards it's final direction.
+
         for command in self.directions:
             if command in ['L', 'R']:
                 self.position_facing = self.direction_transitions[command][self.position_facing]
@@ -81,6 +84,8 @@ class Rover:
                         self.position_y += self.map_transitions[self.position_facing]['steps']
 
     def split_coordinates(self):
+        # Make the coordinates readable and writeable separately
+
         split_coords_pattern = re.compile("(\d{1}) (\d{1}) ([NESW]{1})")
         coords = split_coords_pattern.match(self.position)
 
@@ -89,6 +94,7 @@ class Rover:
         self.position_facing = coords.group(3)
 
     def represent(self):
+        # Constitute a string representing the current state of the rover
         return "%s %s %s" % (
             str(self.position_x),
             str(self.position_y),
